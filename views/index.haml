@@ -1,0 +1,39 @@
+%html
+  %head
+    %title RCDuinoby
+    %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js' }
+  %body
+    herro
+    #odatax
+    #odatay
+    #odataz
+    :javascript
+      var $time = new Date();
+      function handleOrientation(o) {
+        var curtime = new Date();
+        var diff = (curtime - $time);
+        jQuery('#odatax').html(o.x);
+        jQuery('#odatay').html(o.y);
+        jQuery('#odataz').html(o.z);
+
+        if(diff > 50){
+          // get the biggest component
+          if(Math.abs(o.x) > Math.abs(o.y)){
+            if(o.x > 0.1){
+              jQuery.ajax('/right');
+            }else if(o.x < -0.1){
+              jQuery.ajax('/left');
+            }
+          }else{
+            if(o.y > 0.1){
+              jQuery.ajax('/backward');
+            }else if(o.y < -0.1){
+              jQuery.ajax('/forward');
+            }
+          }
+
+          $time = curtime;
+        }
+      }
+
+      window.addEventListener("MozOrientation", handleOrientation, true);
