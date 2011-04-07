@@ -7,7 +7,7 @@ class Car
   def initialize(device)
     @device = device
   end
-  
+
   def drive x,y
     range = -100..100
     x = x.to_i
@@ -42,7 +42,7 @@ class Car
   end
 
   def serial_port
-    @serial_port = SerialPort.new('/dev/tty.usbserial-A700dY3T', 115200)
+    @serial_port = SerialPort.new(device, 115200)
   end
 
   def multiplier

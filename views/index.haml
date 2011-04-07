@@ -7,30 +7,28 @@
     #odatax
     #odatay
     #odataz
+    #odatamapx
+    #odatamapy
     :javascript
       var $time = new Date();
+      var mapped_x = 0;
+      var mapped_y = 0;
+
       function handleOrientation(o) {
         var curtime = new Date();
         var diff = (curtime - $time);
+
         jQuery('#odatax').html(o.x);
         jQuery('#odatay').html(o.y);
         jQuery('#odataz').html(o.z);
+        jQuery('#odatamapx').html(mapped_x);
+        jQuery('#odatamapy').html(mapped_y);
 
         if(diff > 50){
-          // get the biggest component
-          if(Math.abs(o.x) > Math.abs(o.y)){
-            if(o.x > 0.1){
-              jQuery.ajax('/right');
-            }else if(o.x < -0.1){
-              jQuery.ajax('/left');
-            }
-          }else{
-            if(o.y > 0.1){
-              jQuery.ajax('/backward');
-            }else if(o.y < -0.1){
-              jQuery.ajax('/forward');
-            }
-          }
+          mapped_x = 100 * o.x;
+          mapped_y = 100 * o.y;
+
+          jQuery.ajax('/drive?x=' + mapped_x + '&y=' + mapped_y);
 
           $time = curtime;
         }
