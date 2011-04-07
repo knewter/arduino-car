@@ -1,0 +1,60 @@
+%html
+  %head
+    %title RCDuinoby
+    %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js' }
+    %script{ :src => 'http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js' }
+  %body
+    CLICK IN CIRCLE
+    #odatax
+    #odatay
+    #odataz
+    :javascript
+      $mouse_is_down = false
+      var $time = new Date();
+      jQuery(document).ready(function()
+      {
+        // Creates canvas 320 × 200 at 10, 50
+        var paper = Raphael(100, 100, 640, 480);
+
+        var circle = paper.circle(100, 100, 100)
+
+        function drive(e)
+        {
+          var curtime = new Date();
+          if($mouse_is_down == false)
+          {
+            return false;
+          }
+          if( (curtime - $time) < 100)
+          {
+            return false;
+          }
+          var offset = jQuery("circle").offset();
+          var x = (e.pageX - offset.left - 100)
+          var y = (e.pageY - offset.top - 100)
+          console.log([x,y])
+          jQuery.get('/drive', {"x": x, "y": y} );
+          $time = new Date();
+        }
+        jQuery(document).bind("mousedown", function(e)
+        {
+          $mouse_is_down = true;
+          drive(e)
+        });
+
+        jQuery(document).bind("mouseup", function(e)
+        {
+          $mouse_is_down = false;
+        });
+
+        jQuery(document).bind("mousemove", function(e)
+        {
+          drive(e)
+        });
+
+        jQuery(circle.node).bind("click", function(e)
+        {
+          console.log(e)
+        });
+      });
+

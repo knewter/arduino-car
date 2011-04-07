@@ -7,6 +7,23 @@ class Car
   def initialize(device)
     @device = device
   end
+  
+  def drive x,y
+    range = -100..100
+    x = x.to_i
+    y = y.to_i
+
+    x = (x < 0 && x < range.begin) ? -100 : x
+    x = (x > 0 && x > range.end)   ?  100 : x
+
+    y = (y < 0 && y < range.begin) ? -100 : y
+    y = (y > 0 && y > range.end)   ?  100 : y
+
+    puts [x,y].inspect
+    #serial_port.write "X#{x}Y#{y}$"
+    serial_port.write "$X#{x * 3}Z"
+    serial_port.write "$Y#{y * 3}Z"
+  end
 
   def forward
     serial_port.write "i" * multiplier
@@ -25,7 +42,7 @@ class Car
   end
 
   def serial_port
-    @serial_port ||= SerialPort.new(@device, 115200)
+    @serial_port = SerialPort.new('/dev/tty.usbserial-A700dY3T', 115200)
   end
 
   def multiplier
