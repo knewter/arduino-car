@@ -24,9 +24,9 @@
         jQuery('#odatamapx').html(mapped_x);
         jQuery('#odatamapy').html(mapped_y);
 
-        if(diff > 50){
+        if(diff > 100){
           mapped_x = 100 * o.x;
-          mapped_y = 100 * o.y;
+          mapped_y = -100 * o.y;
 
           jQuery.ajax('/drive?x=' + mapped_x + '&y=' + mapped_y);
 

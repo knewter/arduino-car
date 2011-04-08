@@ -9,20 +9,20 @@ class Car
   end
 
   def drive x,y
-    range = -100..100
+    range = -70..70
     x = x.to_i
     y = y.to_i
 
-    x = (x < 0 && x < range.begin) ? -100 : x
-    x = (x > 0 && x > range.end)   ?  100 : x
+    x = (x < 0 && x < range.begin) ? -70 : x
+    x = (x > 0 && x > range.end)   ?  70 : x
 
-    y = (y < 0 && y < range.begin) ? -100 : y
-    y = (y > 0 && y > range.end)   ?  100 : y
+    y = (y < 0 && y < range.begin) ? -70 : y
+    y = (y > 0 && y > range.end)   ?  70 : y
 
     puts [x,y].inspect
     #serial_port.write "X#{x}Y#{y}$"
-    serial_port.write "$X#{x * 3}Z"
-    serial_port.write "$Y#{y * 3}Z"
+    serial_port.write "$X#{x}Z"
+    serial_port.write "$Y#{y}Z"
   end
 
   def forward
