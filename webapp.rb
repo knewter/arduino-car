@@ -3,7 +3,7 @@ require 'sinatra'
 require 'haml'
 require './car.rb'
 
-DEVICE = '/dev/rfcomm0'
+DEVICE = '/dev/ttyUSB0'
 
 get '/' do
   haml :index

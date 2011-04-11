@@ -34,4 +34,14 @@
         }
       }
 
-      window.addEventListener("MozOrientation", handleOrientation, true);
+        if(window.DeviceMotionEvent!=undefined) { 
+          window.ondevicemotion = function(event) {
+            var ax = event.accelerationIncludingGravity.x / 10;
+            var ay = event.accelerationIncludingGravity.y / -10;
+            var az = event.accelerationIncludingGravity.z / 10;
+            handleOrientation({x: ax, y: ay, z: az});
+          };
+        } else {
+          window.addEventListener("MozOrientation", handleOrientation, true);
+        }
+

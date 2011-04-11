@@ -30,9 +30,9 @@
             return false;
           }
           var offset = jQuery("circle").offset();
-          var x = (e.pageX - offset.left - 100)
-          var y = (e.pageY - offset.top - 100)
-          console.log([x,y])
+          var x = (e.pageX - offset.left - 100);
+          var y = -1 * (e.pageY - offset.top - 100);
+          console.log([x,y]);
           jQuery.get('/drive', {"x": x, "y": y} );
           $time = new Date();
         }

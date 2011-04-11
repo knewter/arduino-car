@@ -42,7 +42,7 @@ class Car
   end
 
   def serial_port
-    @serial_port = SerialPort.new(device, 115200)
+    @serial_port = SerialPort.new(device, 19200)
   end
 
   def multiplier
@@ -51,17 +51,5 @@ class Car
 end
 
 if __FILE__ == $0
-  c = Car.new('/dev/rfcomm0')
-  10.times do
-    c.forward
-  end
-  10.times do
-    c.backward
-  end
-  10.times do
-    c.left
-  end
-  10.times do
-    c.right
-  end
+  c = Car.new('/dev/ttyUSB0')
 end
