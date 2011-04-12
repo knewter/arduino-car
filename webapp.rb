@@ -5,7 +5,7 @@ require './car.rb'
 
 #DEVICE = '/dev/ttyUSB0'
 #SPEED = 19200
-DEVICE = '/dev/rfcomm1'
+DEVICE = '/dev/rfcomm0'
 SPEED = 115200
 
 get '/' do

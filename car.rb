@@ -47,10 +47,10 @@ class Car
   end
 
   def multiplier
-    3
+    1
   end
 end
 
 if __FILE__ == $0
-  c = Car.new('/dev/ttyUSB0')
+  c = Car.new('/dev/rfcomm0')
 end
