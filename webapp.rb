@@ -3,7 +3,8 @@ require 'sinatra'
 require 'haml'
 require './car.rb'
 
-DEVICE = '/dev/ttyUSB0'
+DEVICE = '/dev/rfcomm0'
+SPEED = 115200
 
 get '/' do
   haml :index

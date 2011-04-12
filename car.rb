@@ -2,10 +2,11 @@ require 'rubygems'
 require 'serialport'
 
 class Car
-  attr_accessor :device, :serial_port
+  attr_accessor :device, :serial_port, :speed
 
-  def initialize(device)
+  def initialize(device, speed = 115200)
     @device = device
+    @speed = speed
   end
 
   def drive x,y
@@ -42,14 +43,14 @@ class Car
   end
 
   def serial_port
-    @serial_port = SerialPort.new(device, 19200)
+    @serial_port = SerialPort.new(device, @speed)
   end
 
   def multiplier
-    3
+    1
   end
 end
 
 if __FILE__ == $0
-  c = Car.new('/dev/ttyUSB0')
+  c = Car.new('/dev/rfcomm0')
 end
